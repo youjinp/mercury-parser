@@ -199,7 +199,8 @@ var REQUEST_HEADERS = cheerio.browser ? {} : {
   'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
 }; // The number of milliseconds to attempt to fetch a resource before timing out.
 
-var FETCH_TIMEOUT = 10000; // Content types that we do not extract content from
+var FETCH_TIMEOUT = 2000; // 2 seconds
+// Content types that we do not extract content from
 
 var BAD_CONTENT_TYPES = ['audio/mpeg', 'image/gif', 'image/jpeg', 'image/jpg'];
 var BAD_CONTENT_TYPES_RE = new RegExp("^(".concat(BAD_CONTENT_TYPES.join('|'), ")$"), 'i'); // Use this setting as the maximum size an article can be
@@ -299,14 +300,14 @@ function _fetchResource() {
               // Follow GET redirects; this option is for Node only
               followRedirect: true
             });
-            _context.next = 5;
+            _context.prev = 3;
+            _context.next = 6;
             return get(options);
 
-          case 5:
+          case 6:
             _yield$get = _context.sent;
             response = _yield$get.response;
             body = _yield$get.body;
-            _context.prev = 8;
             validateResponse(response);
             return _context.abrupt("return", {
               body: body,
@@ -315,7 +316,7 @@ function _fetchResource() {
 
           case 13:
             _context.prev = 13;
-            _context.t0 = _context["catch"](8);
+            _context.t0 = _context["catch"](3);
             return _context.abrupt("return", {
               error: true,
               message: _context.t0.message
@@ -326,7 +327,7 @@ function _fetchResource() {
             return _context.stop();
         }
       }
-    }, _callee, this, [[8, 13]]);
+    }, _callee, this, [[3, 13]]);
   }));
   return _fetchResource.apply(this, arguments);
 }
@@ -7599,16 +7600,16 @@ function _collectAllPages() {
 
           case 3:
             if (!(next_page_url && pages < 26)) {
-              _context.next = 16;
+              _context.next = 22;
               break;
             }
 
-            pages += 1; // eslint-disable-next-line no-await-in-loop
-
-            _context.next = 7;
+            pages += 1;
+            _context.prev = 5;
+            _context.next = 8;
             return Resource.create(next_page_url);
 
-          case 7:
+          case 8:
             $ = _context.sent;
             html = $.html();
             extractorOpts = {
@@ -7627,10 +7628,19 @@ function _collectAllPages() {
             }); // eslint-disable-next-line prefer-destructuring
 
             next_page_url = nextPageResult.next_page_url;
+            _context.next = 20;
+            break;
+
+          case 17:
+            _context.prev = 17;
+            _context.t0 = _context["catch"](5);
+            return _context.abrupt("break", 22);
+
+          case 20:
             _context.next = 3;
             break;
 
-          case 16:
+          case 22:
             word_count = GenericExtractor.word_count({
               content: "<div>".concat(result.content, "</div>")
             });
@@ -7640,12 +7650,12 @@ function _collectAllPages() {
               word_count: word_count
             }));
 
-          case 18:
+          case 24:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, this);
+    }, _callee, this, [[5, 17]]);
   }));
   return _collectAllPages.apply(this, arguments);
 }

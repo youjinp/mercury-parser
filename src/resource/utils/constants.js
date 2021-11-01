@@ -9,7 +9,7 @@ export const REQUEST_HEADERS = cheerio.browser
     };
 
 // The number of milliseconds to attempt to fetch a resource before timing out.
-export const FETCH_TIMEOUT = 10000;
+export const FETCH_TIMEOUT = 2000; // 2 seconds
 
 // Content types that we do not extract content from
 const BAD_CONTENT_TYPES = [

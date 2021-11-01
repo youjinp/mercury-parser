@@ -21,32 +21,35 @@ export default async function collectAllPages({
   // likely gone wrong.
   while (next_page_url && pages < 26) {
     pages += 1;
-    // eslint-disable-next-line no-await-in-loop
-    $ = await Resource.create(next_page_url);
-    html = $.html();
+    try {
+      // eslint-disable-next-line no-await-in-loop
+      $ = await Resource.create(next_page_url);
+      html = $.html();
 
-    const extractorOpts = {
-      url: next_page_url,
-      html,
-      $,
-      metaCache,
-      contentOnly: true,
-      extractedTitle: title,
-      previousUrls,
-    };
+      const extractorOpts = {
+        url: next_page_url,
+        html,
+        $,
+        metaCache,
+        contentOnly: true,
+        extractedTitle: title,
+        previousUrls,
+      };
 
-    const nextPageResult = RootExtractor.extract(Extractor, extractorOpts);
+      const nextPageResult = RootExtractor.extract(Extractor, extractorOpts);
 
-    previousUrls.push(next_page_url);
-    result = {
-      ...result,
-      content: `${result.content}<hr><h4>Page ${pages}</h4>${
-        nextPageResult.content
-      }`,
-    };
+      previousUrls.push(next_page_url);
+      result = {
+        ...result,
+        content: `${result.content}<hr><h4>Page ${pages}</h4>${nextPageResult.content
+          }`,
+      };
 
-    // eslint-disable-next-line prefer-destructuring
-    next_page_url = nextPageResult.next_page_url;
+      // eslint-disable-next-line prefer-destructuring
+      next_page_url = nextPageResult.next_page_url;
+    } catch (e) {
+      break
+    }    
   }
 
   const word_count = GenericExtractor.word_count({

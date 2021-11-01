@@ -109,18 +109,17 @@ export default async function fetchResource(url, parsedUrl, headers = {}) {
         }),
   };
 
-  const { response, body } = await get(options);
-
   try {
+    const { response, body } = await get(options);
     validateResponse(response);
     return {
       body,
       response,
     };
-  } catch (e) {
+  } catch(e) {
     return {
       error: true,
-      message: e.message,
-    };
+      message: e.message
+    }
   }
 }
