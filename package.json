@@ -1,6 +1,6 @@
 {
   "name": "@youjinp/mercury-parser",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "author": "",
   "license": "MIT",
@@ -21,14 +21,14 @@
     "lint": "eslint . --fix",
     "lint:ci": "remark . && eslint .",
     "lint-fix-quiet": "eslint --fix --quiet",
-    "build": "yarn lint && rollup -c && yarn test:build",
-    "build:ci": "rollup -c && yarn test:build",
-    "build:web": "yarn lint && rollup -c rollup.config.web.js && yarn test:build:web",
-    "build:web:ci": "rollup -c rollup.config.web.js && yarn test:build:web",
-    "release": "yarn build && yarn build:web",
+    "build": "npm lint && rollup -c && npm test:build",
+    "build:ci": "rollup -c && npm test:build",
+    "build:web": "npm lint && rollup -c rollup.config.web.js && npm test:build:web",
+    "build:web:ci": "rollup -c rollup.config.web.js && npm test:build:web",
+    "release": "npm build && npm build:web",
     "build:generator": "rollup -c scripts/rollup.config.js",
     "test_build": "rollup -c",
-    "test": "yarn test:node && yarn test:web",
+    "test": "npm test:node && npm test:web",
     "test:node": "jest --json --outputFile test-output.json",
     "test:web": "node ./node_modules/karma/bin/karma start karma.conf.js --auto-watch",
     "test:build": "cd ./scripts && jest check-build.test.js",
@@ -67,7 +67,6 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.12.3",
     "express": "^4.16.4",
-    "husky": "^3.0.0",
     "inquirer": "^7.0.0",
     "jasmine-core": "^2.5.2",
     "jest": "^23.6.0",
@@ -129,22 +128,5 @@
     "postman-request": "browser-request",
     "iconv-lite": "./src/shims/iconv-lite",
     "moment-timezone": "./node_modules/moment-timezone/builds/moment-timezone-with-data-2012-2022.min.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ],
-    "*.{json,css,md}": [
-      "remark .",
-      "prettier --write",
-      "git add"
-    ]
   }
 }
