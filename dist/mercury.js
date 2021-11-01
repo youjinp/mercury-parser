@@ -268,12 +268,10 @@ function fetchResource(_x, _x2) {
 }
 
 function _fetchResource() {
-  _fetchResource = _asyncToGenerator(
-  /*#__PURE__*/
-  _regeneratorRuntime.mark(function _callee(url, parsedUrl) {
+  _fetchResource = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(url, parsedUrl) {
     var headers,
         options,
-        _ref2,
+        _yield$get,
         response,
         body,
         _args = arguments;
@@ -305,9 +303,9 @@ function _fetchResource() {
             return get(options);
 
           case 5:
-            _ref2 = _context.sent;
-            response = _ref2.response;
-            body = _ref2.body;
+            _yield$get = _context.sent;
+            response = _yield$get.response;
+            body = _yield$get.body;
             _context.prev = 8;
             validateResponse(response);
             return _context.abrupt("return", {
@@ -1580,9 +1578,7 @@ var Resource = {
   //                  string.
   // :param headers: Custom headers to be included in the request
   create: function () {
-    var _create = _asyncToGenerator(
-    /*#__PURE__*/
-    _regeneratorRuntime.mark(function _callee(url, preparedResponse, parsedUrl) {
+    var _create = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(url, preparedResponse, parsedUrl) {
       var headers,
           result,
           validResponse,
@@ -1691,9 +1687,7 @@ var Resource = {
   }
 };
 
-var _marked =
-/*#__PURE__*/
-_regeneratorRuntime.mark(range);
+var _marked = /*#__PURE__*/_regeneratorRuntime.mark(range);
 
 function range() {
   var start,
@@ -1991,13 +1985,16 @@ var NewYorkerExtractor = {
 var WiredExtractor = {
   domain: 'www.wired.com',
   title: {
-    selectors: ['h1.post-title']
+    selectors: ['h1.post-title' // enter title selectors
+    ]
   },
   author: {
-    selectors: ['a[rel="author"]']
+    selectors: ['a[rel="author"]' // enter author selectors
+    ]
   },
   content: {
-    selectors: ['article.content'],
+    selectors: ['article.content' // enter content selectors
+    ],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: [],
@@ -2025,13 +2022,16 @@ var WiredExtractor = {
 var MSNExtractor = {
   domain: 'www.msn.com',
   title: {
-    selectors: ['h1']
+    selectors: ['h1' // enter title selectors
+    ]
   },
   author: {
-    selectors: ['span.authorname-txt']
+    selectors: ['span.authorname-txt' // enter author selectors
+    ]
   },
   content: {
-    selectors: ['div.richtext'],
+    selectors: ['div.richtext' // enter content selectors
+    ],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: [],
@@ -2059,10 +2059,12 @@ var MSNExtractor = {
 var YahooExtractor = {
   domain: 'www.yahoo.com',
   title: {
-    selectors: ['header.canvas-header']
+    selectors: ['header.canvas-header' // enter title selectors
+    ]
   },
   author: {
-    selectors: ['span.provider-name']
+    selectors: ['span.provider-name' // enter author selectors
+    ]
   },
   content: {
     selectors: [// enter content selectors
@@ -2095,10 +2097,12 @@ var YahooExtractor = {
 var BuzzfeedExtractor = {
   domain: 'www.buzzfeed.com',
   title: {
-    selectors: ['h1[id="post-title"]']
+    selectors: ['h1[id="post-title"]' // enter title selectors
+    ]
   },
   author: {
-    selectors: ['a[data-action="user/username"]', 'byline__author']
+    selectors: ['a[data-action="user/username"]', 'byline__author' // enter author selectors
+    ]
   },
   content: {
     selectors: [['.longform_custom_header_media', '#buzz_sub_buzz'], '#buzz_sub_buzz'],
@@ -2140,13 +2144,16 @@ var BuzzfeedExtractor = {
 var WikiaExtractor = {
   domain: 'fandom.wikia.com',
   title: {
-    selectors: ['h1.entry-title']
+    selectors: ['h1.entry-title' // enter title selectors
+    ]
   },
   author: {
-    selectors: ['.author vcard', '.fn']
+    selectors: ['.author vcard', '.fn' // enter author selectors
+    ]
   },
   content: {
-    selectors: ['.grid-content', '.entry-content'],
+    selectors: ['.grid-content', '.entry-content' // enter content selectors
+    ],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: [],
@@ -2174,10 +2181,12 @@ var WikiaExtractor = {
 var LittleThingsExtractor = {
   domain: 'www.littlethings.com',
   title: {
-    selectors: ['h1.post-title']
+    selectors: ['h1.post-title' // enter title selectors
+    ]
   },
   author: {
-    selectors: [['meta[name="author"]', 'value']]
+    selectors: [['meta[name="author"]', 'value'] // enter author selectors
+    ]
   },
   content: {
     selectors: [// enter content selectors
@@ -2635,7 +2644,8 @@ var WwwThevergeComExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.aside', 'img.c-dynamic-image']
+    clean: ['.aside', 'img.c-dynamic-image' // images come from noscript transform
+    ]
   }
 };
 
@@ -3373,7 +3383,8 @@ var WwwThepoliticalinsiderComExtractor = {
     ]
   },
   lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
+    selectors: [['meta[name="og:image"]', 'value'] // enter selectors
+    ]
   },
   content: {
     selectors: ['div#article-body'],
@@ -4860,7 +4871,8 @@ var WwwRedditComExtractor = {
   content: {
     selectors: [['div[data-test-id="post-content"] p'], // text post
     ['div[data-test-id="post-content"] a[target="_blank"]:not([data-click-id="timestamp"])', // external link
-    'div[data-test-id="post-content"] div[data-click-id="media"]'], // external link with media preview (YouTube, imgur album, etc...)
+    'div[data-test-id="post-content"] div[data-click-id="media"]' // embedded media
+    ], // external link with media preview (YouTube, imgur album, etc...)
     ['div[data-test-id="post-content"] div[data-click-id="media"]'], // Embedded media (Reddit video)
     ['div[data-test-id="post-content"] a[target="_blank"]:not([data-click-id="timestamp"])'], // external link
     'div[data-test-id="post-content"]'],
@@ -7573,9 +7585,7 @@ function collectAllPages(_x) {
 }
 
 function _collectAllPages() {
-  _collectAllPages = _asyncToGenerator(
-  /*#__PURE__*/
-  _regeneratorRuntime.mark(function _callee(_ref) {
+  _collectAllPages = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(_ref) {
     var next_page_url, html, $, metaCache, result, Extractor, title, url, pages, previousUrls, extractorOpts, nextPageResult, word_count;
     return _regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -7642,9 +7652,7 @@ function _collectAllPages() {
 
 var Mercury = {
   parse: function () {
-    var _parse = _asyncToGenerator(
-    /*#__PURE__*/
-    _regeneratorRuntime.mark(function _callee(url) {
+    var _parse = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(url) {
       var _ref,
           html,
           opts,
@@ -7781,7 +7789,15 @@ var Mercury = {
 
             case 26:
               if (contentType === 'markdown') {
-                turndownService = new TurndownService();
+                turndownService = new TurndownService({
+                  headingStyle: "atx",
+                  hr: "- - -",
+                  codeBlockStyle: "fenced",
+                  fence: "```",
+                  emDelimiter: "*",
+                  strongDelimiter: "**",
+                  linkStyle: "inlined"
+                });
                 result.content = turndownService.turndown(result.content);
               } else if (contentType === 'text') {
                 result.content = $.text($(result.content));
