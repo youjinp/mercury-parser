@@ -103,7 +103,15 @@ const Mercury = {
     }
 
     if (contentType === 'markdown') {
-      const turndownService = new TurndownService();
+      const turndownService = new TurndownService({ 
+        headingStyle: "atx", 
+        hr: "- - -",
+        codeBlockStyle: "fenced",
+        fence: "```",
+        emDelimiter: "*",
+        strongDelimiter: "**",
+        linkStyle: "inlined",
+      });
       result.content = turndownService.turndown(result.content);
     } else if (contentType === 'text') {
       result.content = $.text($(result.content));

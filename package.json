@@ -28,7 +28,7 @@
     "release": "npm build && npm build:web",
     "build:generator": "rollup -c scripts/rollup.config.js",
     "test_build": "rollup -c",
-    "test": "npm test:node && npm test:web",
+    "test": "npm run test:node && npm run test:web",
     "test:node": "jest --json --outputFile test-output.json",
     "test:web": "node ./node_modules/karma/bin/karma start karma.conf.js --auto-watch",
     "test:build": "cd ./scripts && jest check-build.test.js",
